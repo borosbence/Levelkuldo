@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Levelkuldo.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Levelkuldo.Views.UzenetPage"
+             Title="Üzenet">
+    <!--<ContentPage.BindingContext>
+        <vm:UzenetViewModel/>
+    </ContentPage.BindingContext>-->
+
+    <ScrollView>
+        <StackLayout Spacing="10" Margin="10">
+            <VerticalStackLayout IsVisible="{Binding Loading}" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="{Binding Loading}"/>
+                <Label>Betöltés...</Label>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding Loaded}">
+                <ScrollView Orientation="Horizontal">
+                    <HorizontalStackLayout Margin="0,0,0,20">
+                        <Button Text="Üzenet importálása" Command="{Binding ImportCommandAsync}" CommandParameter="üzenet"/>
+                        <Button Text="Címzettek importálása" Command="{Binding ImportCommandAsync}" CommandParameter="címzettek" />
+                        <Button Text="Levél küldése" Command="{Binding SendMailCommandAsync}" />
+                    </HorizontalStackLayout>
+                </ScrollView>
+                <Label>Feladó</Label>
+                <Entry Placeholder="Feladó e-mail címe" Text="{Binding Felado}">
+                    <Entry.Behaviors>
+                        <toolkit:EmailValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label>Tárgy</Label>
+                <Entry Placeholder="Az üzenet tárgya" Text="{Binding Targy}" />
+                <Label>Üzenet</Label>
+                <WebView MinimumHeightRequest="400"
+                     MinimumWidthRequest="400" 
+                     VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="FillAndExpand">
+                    <WebView.Source>
+                        <HtmlWebViewSource Html="{Binding Uzenet}" />
+                    </WebView.Source>
+                </WebView>
+            </VerticalStackLayout>
+        </StackLayout>
+        
+    </ScrollView>
+</ContentPage>

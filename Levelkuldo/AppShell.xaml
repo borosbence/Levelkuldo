@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Levelkuldo.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Levelkuldo"
+    xmlns:views="clr-namespace:Levelkuldo.Views"
+    Shell.FlyoutBehavior="Disabled">
+    <TabBar>
+        <Tab Title="Üzenet">
+            <ShellContent ContentTemplate="{DataTemplate views:UzenetPage}" />
+        </Tab>
+        <Tab Title="Napló">
+            <ShellContent ContentTemplate="{DataTemplate views:NaploPage}" />
+        </Tab>
+    </TabBar>
+</Shell>
