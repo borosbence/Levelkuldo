@@ -7,6 +7,7 @@ namespace Levelkuldo.Services
     {
         public async Task SendEmailAsync(string from, string to, string subject, string body)
         {
+            // https://blog.elmah.io/how-to-send-emails-from-csharp-net-the-definitive-tutorial/
             using (SmtpClient client = new SmtpClient())
             {
                 string username = "boros.bence@vasvari.org";

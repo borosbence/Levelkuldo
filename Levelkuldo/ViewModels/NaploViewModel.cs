@@ -25,6 +25,7 @@ namespace Levelkuldo.ViewModels
 
         private void RegisterMessages()
         {
+            // https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/messagingcenter?view=net-maui-6.0
             MessagingCenter.Subscribe<UzenetViewModel>(this, "log", (sender) =>
             {
                 FrissitBejegyzesek();

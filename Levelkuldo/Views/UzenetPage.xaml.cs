@@ -6,7 +6,7 @@ public partial class UzenetPage : ContentPage
 {
     public UzenetPage(UzenetViewModel viewModel)
     {
-        BindingContext= viewModel;
+        BindingContext = viewModel;
         InitializeComponent();
     }
 }

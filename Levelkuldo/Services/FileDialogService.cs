@@ -2,6 +2,7 @@
 {
     public class FileDialogService
     {
+        // https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/storage/file-picker?view=net-maui-6.0&tabs=android
         public async Task<string> PickFileToString(string title, List<string> types)
         {
             var fileTypes = new FilePickerFileType(

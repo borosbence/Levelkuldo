@@ -28,9 +28,9 @@
                 <Entry Placeholder="Feladó e-mail címe" Text="{Binding Felado}">
                     <Entry.Behaviors>
                         <toolkit:EmailValidationBehavior 
-                        InvalidStyle="{StaticResource InvalidEntryStyle}"
-                        ValidStyle="{StaticResource ValidEntryStyle}"
-                        Flags="ValidateOnValueChanged" />
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}"
+                            Flags="ValidateOnValueChanged" />
                     </Entry.Behaviors>
                 </Entry>
                 <Label>Tárgy</Label>
