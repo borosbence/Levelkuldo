@@ -21,6 +21,7 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<FileDialogService>();
+        builder.Services.AddSingleton<LogService>();
         builder.Services.AddSingleton<EmailService>();
 
         builder.Services.AddTransient<UzenetViewModel>();

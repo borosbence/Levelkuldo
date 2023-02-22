@@ -12,15 +12,18 @@ namespace Levelkuldo.ViewModels
             set { SetProperty(ref _bejegyzes, value); }
         }
 
-        public NaploViewModel()
+        private readonly LogService _logService;
+
+        public NaploViewModel(LogService logService)
         {
+            _logService = logService;
             FrissitBejegyzesek();
             RegisterMessages();
         }
 
         private void FrissitBejegyzesek()
         {
-            Bejegyzes = string.Join(Environment.NewLine, LogService.Logs);
+            Bejegyzes = string.Join(Environment.NewLine, _logService.Logs);
         }
 
         private void RegisterMessages()

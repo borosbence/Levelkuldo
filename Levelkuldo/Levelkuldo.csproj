@@ -13,7 +13,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Levelkuldo</ApplicationTitle>
+		<ApplicationTitle>Levélküldő</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.levelkuldo</ApplicationId>

@@ -27,30 +27,33 @@ namespace Levelkuldo.ViewModels
             set { SetProperty(ref _uzenet, value); }
         }
 
-        private bool loading;
-        public bool Loading
+        private bool _isSending;
+        public bool IsSending
         {
-            get { return loading; }
-            set { SetProperty(ref loading, value); }
+            get { return _isSending; }
+            set { SetProperty(ref _isSending, value); }
         }
 
-        private bool loaded = true;
-        public bool Loaded
+        private bool sent = true;
+        public bool Sent
         {
-            get { return loaded; }
-            set { SetProperty(ref loaded, value); }
+            get { return sent; }
+            set { SetProperty(ref sent, value); }
         }
 
-        private FileDialogService _dialogService;
-        private EmailService _emailService;
+        private readonly FileDialogService _dialogService;
+        private readonly EmailService _emailService;
+        private readonly LogService _logService;
         private List<string> emailCimek;
         public IAsyncRelayCommand<string> ImportCommandAsync { get; }
         public IAsyncRelayCommand SendMailCommandAsync { get; }
 
-        public UzenetViewModel(FileDialogService dialogService, EmailService emailService)
+        public UzenetViewModel(FileDialogService dialogService, LogService logService, EmailService emailService)
         {
             _dialogService = dialogService;
+            _logService = logService;
             _emailService = emailService;
+
             emailCimek = new();
             ImportCommandAsync = new AsyncRelayCommand<string>(PickFile);
             SendMailCommandAsync = new AsyncRelayCommand(SendMail);
@@ -64,39 +67,41 @@ namespace Levelkuldo.ViewModels
             {
                 fileTypes.Add("*.html");
                 fileTypes.Add("*.htm");
-                Loading = true;
-                Loaded = !Loading;
                 var result = await _dialogService.PickFileToString(title, fileTypes);
                 Uzenet = result;
-                LogService.Insert("Üzenet betöltve.");
+                _logService.Insert("Üzenet betöltve.");
             }
             else if (param == "címzettek")
             {
-                fileTypes.Add("*.csv");
-                Loading = true;
-                Loaded = !Loading;
+                fileTypes.Add("*.txt");
                 emailCimek = await _dialogService.PickFileToList(title, fileTypes);
                 foreach (var item in emailCimek)
                 {
-                    LogService.Insert($"Címzett: {item} betöltve.");
+                    _logService.Insert($"Címzett: {item} betöltve.");
                 }
             }
-            Loading = false;
-            Loaded = !Loading;
             MessagingCenter.Send(this, "log");
         }
 
         private async Task SendMail()
         {
-            Loading = true;
-            Loaded = !Loading;
-            foreach (var item in emailCimek)
+            IsSending = true;
+            Sent = !IsSending;
+            foreach (var cim in emailCimek)
             {
-                await _emailService.SendEmailAsync(Felado, item, Targy, Uzenet);
+                try
+                {
+                    await _emailService.SendEmailAsync(Felado, cim, Targy, Uzenet);
+                    _logService.Insert($"Sikeres üzenet küldés: {cim} .");
+                }
+                catch (Exception ex)
+                {
+                    _logService.Insert($"Hiba: {ex.Message}");
+                }
             }
             MessagingCenter.Send(this, "log");
-            Loading = false;
-            Loaded = !Loading;
+            IsSending = false;
+            Sent = !IsSending;
         }
     }
 }

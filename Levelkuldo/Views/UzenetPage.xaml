@@ -11,12 +11,12 @@
 
     <ScrollView>
         <StackLayout Spacing="10" Margin="10">
-            <VerticalStackLayout IsVisible="{Binding Loading}" HorizontalOptions="Center">
-                <ActivityIndicator IsRunning="{Binding Loading}"/>
-                <Label>Betöltés...</Label>
+            <VerticalStackLayout IsVisible="{Binding IsSending}" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="True"/>
+                <Label>Levelek küldése...</Label>
             </VerticalStackLayout>
 
-            <VerticalStackLayout IsVisible="{Binding Loaded}">
+            <VerticalStackLayout IsVisible="{Binding Sent}">
                 <ScrollView Orientation="Horizontal">
                     <HorizontalStackLayout Margin="0,0,0,20">
                         <Button Text="Üzenet importálása" Command="{Binding ImportCommandAsync}" CommandParameter="üzenet"/>

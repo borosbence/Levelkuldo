@@ -23,15 +23,7 @@ namespace Levelkuldo.Services
                 client.EnableSsl = true;
                 client.Credentials = new NetworkCredential(username, password);
 
-                try
-                {
-                    await client.SendMailAsync(from, to, subject, body);
-                    LogService.Insert($"Sikeres üzenet küldés: {to} .");
-                }
-                catch (Exception ex)
-                {
-                    LogService.Insert($"Hiba: {ex.Message}");
-                }
+                await client.SendMailAsync(from, to, subject, body);
             }
         }
     }
