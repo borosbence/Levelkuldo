@@ -10,10 +10,10 @@ namespace Levelkuldo.Services
             // https://blog.elmah.io/how-to-send-emails-from-csharp-net-the-definitive-tutorial/
             using (SmtpClient client = new SmtpClient())
             {
-                string username = "boros.bence@vasvari.org";
-                string password = "C6IO5Gpcw7Nhf9F0";
+                string username = "FELHASZNÁLÓNÉV";
+                string password = "JELSZÓ";
 
-                client.Host = "smtp-relay.sendinblue.com";
+                client.Host = "smtp.gmail.com";
                 client.Port = 587;
                 // client.Host = "smtp.gmail.com";
                 // client.Port = 587;
